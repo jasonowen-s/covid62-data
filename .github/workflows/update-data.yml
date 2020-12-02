@@ -1,0 +1,22 @@
+name: update covid data daily
+
+on:
+  schedule:
+    - cron: "0 9 * * *"
+
+jobs:
+  get_latest_data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: update data.json
+        run: wget 'https://data.covid19.go.id/public/api/update.json' -O data.json
+
+      - name: push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "data updated at $(date +%c' '%Z)"
+          git push
