@@ -2,7 +2,7 @@ name: update covid data daily
 
 on:
   schedule:
-    - cron: "0 10 * * *"
+    - cron: "0 11 * * *"
 
 jobs:
   get_latest_data:
